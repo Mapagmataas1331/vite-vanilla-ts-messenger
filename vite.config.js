@@ -19,5 +19,8 @@ export default {
     partytownVite({
       dest: path.join(__dirname, 'dist', '~partytown')
     })
-  ]
+  ],
+  resolve: {
+    alias: [{ find: '@', replacement: path.resolve(__dirname, './src') }]
+  }
 };
