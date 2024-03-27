@@ -1,0 +1,25 @@
+{
+  "lang": "en-EN",
+  "name": "Vite Vanilla TypeScript Messenger",
+  "short_name": "Vite vanilla ts Messenger",
+  "description": "Vite Vanilla TypeScript Messenger.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#09090b",
+  "background_color": "#09090b",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "48x48 72x72 96x96 128x128 256x256 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}
