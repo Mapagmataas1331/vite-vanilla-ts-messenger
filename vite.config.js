@@ -4,23 +4,30 @@ import path from 'node:path';
 import { partytownVite } from '@builder.io/partytown/utils';
 import legacy from '@vitejs/plugin-legacy';
 
-import _config from './_config.js';
-
-const HOST = _config.server.host;
-const PORT = _config.server.port;
-
 const root = path.resolve(__dirname, 'pages');
 const getPages = () => {
-  const pages = {
-    main: path.resolve(root, 'index.html'),
-    404: path.resolve(root, '404.html')
+  const pages = {};
+  const walk = (dir, prefix = '') => {
+    const dirents = fs.readdirSync(dir, { withFileTypes: true });
+    for (const dirent of dirents) {
+      const fullPath = path.resolve(dir, dirent.name);
+      if (dirent.isDirectory()) {
+        const subPrefix = prefix === '' ? dirent.name : dirent.name;
+        walk(fullPath, subPrefix);
+      } else if (dirent.isFile() && dirent.name.endsWith('.html')) {
+        if (dirent.name === 'index.html' && prefix === '') {
+          pages['main'] = fullPath;
+        } else {
+          const pageName =
+            dirent.name === 'index.html'
+              ? prefix
+              : path.parse(dirent.name).name;
+          pages[pageName] = fullPath;
+        }
+      }
+    }
   };
-  fs.readdirSync(root, { withFileTypes: true })
-    .filter((dirent) => dirent.isDirectory())
-    .map((dirent) => dirent.name)
-    .forEach((page) => {
-      pages[page] = path.resolve(root, page, 'index.html');
-    });
+  walk(root);
   return pages;
 };
 
@@ -29,10 +36,6 @@ export default {
   appType: 'mpa',
   base: './',
   root,
-  server: {
-    host: HOST,
-    port: PORT
-  },
   plugins: [
     legacy(),
     partytownVite({
