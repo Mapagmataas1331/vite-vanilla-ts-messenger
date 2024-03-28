@@ -11,7 +11,10 @@ const PORT = _config.server.port;
 
 const root = path.resolve(__dirname, 'pages');
 const getPages = () => {
-  const pages = { main: path.resolve(root, 'index.html') };
+  const pages = {
+    main: path.resolve(root, 'index.html'),
+    404: path.resolve(root, '404.html')
+  };
   fs.readdirSync(root, { withFileTypes: true })
     .filter((dirent) => dirent.isDirectory())
     .map((dirent) => dirent.name)
