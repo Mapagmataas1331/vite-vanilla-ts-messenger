@@ -50,6 +50,15 @@ export default {
     }
   },
   resolve: {
-    alias: [{ find: '@', replacement: path.resolve(__dirname, 'src') }]
-  }
+    alias: [
+      { find: '~root', replacement: path.resolve(__dirname) },
+      { find: '~pages', replacement: path.resolve(__dirname, 'pages') },
+      { find: '~src', replacement: path.resolve(__dirname, 'src') },
+      { find: '~assets', replacement: path.resolve(__dirname, 'src/assets') },
+      { find: '~lib', replacement: path.resolve(__dirname, 'src/lib') },
+      { find: '~scripts', replacement: path.resolve(__dirname, 'src/scripts') },
+      { find: '~styles', replacement: path.resolve(__dirname, 'src/styles') }
+    ]
+  },
+  publicDir: path.resolve(__dirname, 'public')
 };
