@@ -62,6 +62,17 @@
   </footer>
 </body>
 
-<script type="module" src="~pages/404.ts"></script>
+<script type="module">
+  import '~styles/global.scss';
+  import '~styles/global.css';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const year = document.querySelector('#year');
+
+    if (year) {
+      year.textContent = new Date().getFullYear().toString();
+    }
+  });
+</script>
 
 </html>
